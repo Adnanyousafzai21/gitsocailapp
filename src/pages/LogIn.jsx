@@ -21,13 +21,11 @@ console.log("request data", data)
         }
         const loginedres = await response.json()
         console.log(loginedres)
-
-
     }
     return (
         <>
-            <div className="bg-slate-50 w-[100%]  py-20 ">
-                <form onSubmit={handleSubmit(login)} autoComplete='off' className="bg-white rounded-md m-auto md:-[50%] w-[90%] lg:w-[30%] px-10 py-20" >
+            <div className="bg-slate-100 w-[100%]  py-8 ">
+                <form onSubmit={handleSubmit(login)} autoComplete='off' className="bg-white rounded-md m-auto md:w-[40%] w-[90%] lg:w-[30%] px-10 py-8" >
 
                     <h2 className='text-sky-500 text-center font-bold text-xl'>LogIn</h2>
                     <div className="w-full my-5 ">
@@ -45,10 +43,9 @@ console.log("request data", data)
                     </div>
                     {errors.password && <p className='text-red-500 mt-[-20px] mb-2 font-thin'>{errors.password.message}</p>}
                     <div className="w-full my-5  text-center">
-                        <input type="submit" value="LogIn" className='hover:bg-white duration-1000 hover:text-sky-500 border-2 font-semibold border-sky-500 px-6 py-1  outline-none bg-sky-500 rounded text-white' />
+                        <input type="submit" value="LogIn" className= 'text-sm hover:bg-white duration-1000 hover:text-sky-500 border-2 border-sky-500 px-7 outline-none bg-sky-500 rounded text-white' />
                     </div>  
-                      <hr />
-                    <p className='my-3'>If you don't already have  <Link to="/signup"> SignUp </Link> !</p>
+                    <p className=' my-53 text-center w-full text-sm  font-thin'>If you don't already have  <Link className='text-sky-600 underline' to="/signup"> SignUp </Link> !</p>
               
 
 
@@ -60,3 +57,4 @@ console.log("request data", data)
 }
 
 export default LogIn
+ 

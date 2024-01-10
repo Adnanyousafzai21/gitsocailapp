@@ -12,3 +12,9 @@
 .animate-spin {
   animation: spin infinite linear 10s; /* Adjust the duration as needed */
 }
+.postmargin{
+  margin-top:-6px
+}
+.descrition{
+  margin-bottom: -5px;
+}
