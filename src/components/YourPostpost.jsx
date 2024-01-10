@@ -32,7 +32,7 @@ console.log(posts)
                         return <div className='w-full flex flex-col gap-2 mt-3 '>
                             <div className='flex justify-between '>
                                 <div className="flex">
-                                    {/* <ProfileTitle /> */}
+                                    <ProfileTitle time={yourposts.createdAt} />
                                 </div>
                                 <div>
                                     <PostDeletUpdate />

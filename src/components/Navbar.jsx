@@ -1,12 +1,14 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Profileimg from './Profileimg'
 const Navbar = () => {
     return (
         <div className='w-full bg-white text-sky-500  sticky top-0 z-30'>
-            <div className='max-w-[800px]  mx-auto '>
-                <div className='flex'>
+            <div className='max-w-[750px]   mx-auto '>
+                <div className='flex justify-between'>
                     <div className="">
-                        <img src="" alt="" /></div>
+                        <Profileimg />
+                    </div>
                     <ul className='flex flex-row  gap-5 '>
                         <li className='my-2'>
                             <Link to="/" className="py-2 px-4">Home</Link>
