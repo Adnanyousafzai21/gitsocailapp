@@ -9,7 +9,7 @@ const Navbar = () => {
                     <div className="">
                         <Profileimg />
                     </div>
-                    <ul className='flex flex-row  md:gap-5  gap-2'>
+                    <ul className='flex flex-row md:gap-10 gap-5  '>
                         <li className='my-2'>
                             <Link to="/" className="py-2 ">Home</Link>
                         </li>
