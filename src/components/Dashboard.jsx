@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import Profileimg from './Profileimg';
 import { MdOutlineInsertPhoto } from "react-icons/md";
-const Dashboard = ({setUpdate}) => {
+import { useNavigate } from 'react-router-dom';
+import Modalmessage from './Modal';
+const Dashboard = ({ setUpdate }) => {
+   const Navigate= useNavigate()
+
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [isLoading, setIsloading] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const handleFileChange = (event) => {
         const file = event.target?.files[0];
         setSelectedFile(file);
@@ -19,7 +24,18 @@ const Dashboard = ({setUpdate}) => {
     const isPostButtonVisible = selectedFile || description.trim().length > 0;
 
     const handleForm = async () => {
+
         try {
+            const isLoggedIn = localStorage.getItem('userId');
+            if (!isLoggedIn) {
+                setIsModalOpen(true);
+                setTimeout(() => {
+                    setIsModalOpen(false);
+                    Navigate("/login")
+                }, 10000);
+
+                return;
+            }
             setIsloading(true)
             let formData = new FormData()
             formData.append('description', description)
@@ -34,7 +50,7 @@ const Dashboard = ({setUpdate}) => {
                 console.log("your post is successfully uploaded okay", resdata)
                 setDescription("")
                 setSelectedFile(null)
-                setUpdate((preve)=>!preve)
+                setUpdate((preve) => !preve)
             }
         } catch (error) {
             console.log("somthing wern rong", error)
@@ -44,7 +60,8 @@ const Dashboard = ({setUpdate}) => {
             setIsloading(false)
         }
     }
-    
+
+
     return (
         <div title={`!! Donn't Upload Uncompressed or large-File/Videos\nit's take tooMuch time and can be rejected so donn't `} className='py-5 px-5 rounded-lg background bg-white w-full'>
             <div className='w-full flex justify-between items-center gap-4'>
@@ -92,6 +109,9 @@ const Dashboard = ({setUpdate}) => {
                     <button onClick={handleForm} className='px-3  w-[65%] mx-auto bg-sky-500 outline-none rounded text-white'>{isLoading ? "file is upLoading..." : "Post"}</button>
                 </div>)
             }
+            {isModalOpen && (
+        <Modalmessage isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} message={"It's  need Longin frist your are redirected to loin page"} />
+      )}
         </div>
     );
 }
