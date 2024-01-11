@@ -9,18 +9,18 @@ const Navbar = () => {
                     <div className="">
                         <Profileimg />
                     </div>
-                    <ul className='flex flex-row  gap-5 '>
+                    <ul className='flex flex-row  md:gap-5  gap-2'>
                         <li className='my-2'>
-                            <Link to="/" className="py-2 px-4">Home</Link>
+                            <Link to="/" className="py-2 ">Home</Link>
                         </li>
                         {/* <li className='my-2'>
-                            <Link to="/yourpost" className="py-2 px-4">yourPost</Link>
+                            <Link to="/yourpost" className="py-2 ">yourPost</Link>
                         </li> */}
                         <li className='my-2'>
-                            <Link to="/profile" className="py-2 px-4">Profile</Link>
+                            <Link to="/profile" className="py-2 ">Profile</Link>
                         </li>
                         <li className='my-2'>
-                            <Link to="/login" className="py-2 px-4">LogIn</Link>
+                            <Link to="/login" className="py-2 ">LogIn</Link>
                         </li>
                     </ul>
                 </div>
