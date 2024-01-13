@@ -6,7 +6,7 @@ import Modalmessage from './Modal';
 const Dashboard = ({ setUpdate }) => {
    const Navigate= useNavigate()
    const data =  JSON.parse(localStorage.getItem('User'));
-   const User = data.user
+   const User = data?.user ? data?.user:""
   
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);

@@ -6,7 +6,7 @@ import Profileimg from './Profileimg';
 const StoriesDashboard = () => {
     const Navigate= useNavigate()
     const data =  JSON.parse(localStorage.getItem('User'));
-    const User = data.user
+    const User = data?.user?data?.user:""
     console.log("local storage",User)
      const [selectedFile, setSelectedFile] = useState(null);
      const [previewSUrl, setPrevieSUrl] = useState(null);

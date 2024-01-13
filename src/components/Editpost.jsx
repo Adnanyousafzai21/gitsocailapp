@@ -11,7 +11,7 @@ const Editpost = ({ postId, isModalOpen, setIsModalOpen }) => {
 
   const Navigate = useNavigate();
   const data = JSON.parse(localStorage.getItem('User'));
-  const User = data.user;
+  const User = data?.user?data?.user:""
 
   const [editpostSelectedFile, setEditpostSelectedFile] = useState(null);
   const [editpostPreviewUrl, setEditpostPreviewUrl] = useState(null);

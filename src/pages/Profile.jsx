@@ -6,7 +6,7 @@ import ProfileTitle from '../components/ProfileTitle'
 
 const Profile = () => {
   const data = JSON.parse(localStorage.getItem("User"))
-  const User = data.user
+  const User = data?.user?data?.user:""
   return (
     <Main>
       <div className="w-full m-auto h-full">
