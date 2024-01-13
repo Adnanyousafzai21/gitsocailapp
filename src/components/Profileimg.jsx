@@ -1,5 +1,4 @@
 import React from 'react';
-import { RiUserLine } from "react-icons/ri";
 const Profileimg = ({ avater }) => {
   return (
     <div className='rounded-full w-9 h-9 flex items-center justify-center overflow-hidden  border'>

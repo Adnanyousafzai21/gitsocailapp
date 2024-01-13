@@ -25,7 +25,6 @@ const Signup = () => {
               
                 if(response.ok){
                     const resdata= await response.json()
-                    // const resdata= await response.json()
                     console.log("signup successfully ", resdata)
                 }
                 else{

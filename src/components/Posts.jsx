@@ -4,15 +4,12 @@ import Profile from '../pages/Profile'
 import PostComments from './PostComments'
 import ProfileTitle from './ProfileTitle'
 import PostDeletUpdate from './PostDeletUpdate'
+import Editpost from './Editpost'
 
-const Posts = ({pupdate}) => {
+const Posts = ({ pupdate }) => {
     const [data, setData] = useState([])
-
-
-
-    // console.log("fetched data ", data)
+    const [isModalOpen, setIsModalOpen] = useState(false);
     useEffect(() => {
-
         getData()
     }, [pupdate])
     const getData = async () => {
@@ -21,19 +18,19 @@ const Posts = ({pupdate}) => {
             if (response.ok) {
                 const postData = await response.json()
                 setData(postData.posts.reverse())
-                console.log("postData is fetched successfully", postData)
             }
         } catch (error) {
             console.log(error)
         }
     }
     return (
-        <div className='w-full  bg-white rounded-md my-2 py-2 px-5  '>
+        <div className='w-full  bg-customwhite rounded-md my-2 py-2 px-5  '>
             {
                 data && data?.reverse().map((data) => {
                     return <div className='flex flex-col gap-2 my-3' key={data._id}>
-                        <div className="flex justify-between"><ProfileTitle avater={data?.user?.avater} fullname={data?.user?.fullname} time={data?.createdAt} /> <PostDeletUpdate postId={data._id}/></div>
-                        <p className={`px-1 text-[#333333] text-sm descrition ${!data?.file ? "bg-sky-300 w-full flex items-center justify-center rounded-md  py-2 text-center text-white min-h-24 max-h-40 overflow-hidden" : ""} `}>{data?.description}</p>
+                        <div className="flex justify-between"><ProfileTitle avater={data.user?.avater} fullname={data?.user?.fullname} time={data?.createdAt} />
+                         <PostDeletUpdate postId={data._id}  /></div>
+                        <p className={`px-1 text-[#333333] text-sm descrition ${!data?.file ? "bg-sky-300 w-full flex items-center justify-center rounded-md  py-2 text-center text-customwhite min-h-36 max-h-48 overflow-hidden" : ""} `}>{data?.description}</p>
                         <div>
                             {data?.file ? (
                                 data.file.includes('/video/') ? (
@@ -48,10 +45,8 @@ const Posts = ({pupdate}) => {
                         <div className='mt-[-5]'>
                             <PostComments comments={data?.comments} />
                         </div>
-
-
-                    </div>
-
+                         </div>
+                  
                 })
             }
         </div>

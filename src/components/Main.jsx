@@ -12,12 +12,13 @@ const Main = ({ children }) => {
   const location = useLocation()
 
   return (
-    <div className=' max-w-[750px]  flex flex-col py-2 gap-2  md:flex-row m-auto  justify-center'>
-      <div className={`md:w-[25%] w-[95%] mx-auto
-       ${isDesktopOrTablet && location.pathname === "/profile" ? "hidden" : ""}`}>
-        <Stories /></div>
-      <div className='w-[95%] md:[40%] mx-auto'>{children}</div>
-      <div className=':md:w-[25%] w-[95%] hidden mx-auto lg:block'>
+    <div className=' max-w-[800px]  flex flex-col py-2 gap-2 items-center md:items-start  md:flex-row m-auto  justify-center'>
+      <div className={`md:w-[25%]  border w-[95%]
+      ${isDesktopOrTablet && location.pathname === "/profile" ? "hidden" : ""} sticky top-14 md:block hidden`}>
+        <Stories />
+        </div>
+      <div className='md:w-[40%]  w-[95%] border '>{children}</div>
+      <div className='md:w-[25%] w-[95%]  hidden lg:block sticky top-14'>
         <Features />
       </div>
     </div>

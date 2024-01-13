@@ -22,3 +22,22 @@ body{
   font-family: 'Roboto Condensed', sans-serif;
   background-color: #F5F7FA;
 }
+
+/* Add these styles to your CSS or styles file */
+.scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #4a4a4a #fff; /* thumb color track color */
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 5px; 
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #5b5252;
+  border-radius: 15px; 
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background-color: #fff; /* color of the scrollbar track */
+}

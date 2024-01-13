@@ -5,17 +5,23 @@ import { useNavigate } from 'react-router-dom';
 import Modalmessage from './Modal';
 const Dashboard = ({ setUpdate }) => {
    const Navigate= useNavigate()
-
+   const data =  JSON.parse(localStorage.getItem('User'));
+   const User = data.user
+  
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [isLoading, setIsloading] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const handleFileChange = (event) => {
+    const createObjectURL = (file) => {
+        return file ? URL.createObjectURL(file) : null;
+      };
+    
+      const handleFileChange = (event) => {
         const file = event.target?.files[0];
         setSelectedFile(file);
-        const preview = URL.createObjectURL(file);
+        const preview = createObjectURL(file);
         setPreviewUrl(preview);
-    };
+      };
     const [description, setDescription] = useState("")
     const update = (e) => {
         setDescription(e.target.value)
@@ -26,8 +32,8 @@ const Dashboard = ({ setUpdate }) => {
     const handleForm = async () => {
 
         try {
-            const isLoggedIn = localStorage.getItem('userId');
-            if (!isLoggedIn) {
+        
+            if (!data) {
                 setIsModalOpen(true);
                 setTimeout(() => {
                     setIsModalOpen(false);
@@ -40,7 +46,7 @@ const Dashboard = ({ setUpdate }) => {
             let formData = new FormData()
             formData.append('description', description)
             formData.append('file', selectedFile),
-                formData.append("user", '659d612a662a0da1dbaab445')
+                formData.append("user", User._id)
             const response = await fetch("http://localhost:8000/api/v1/posts/Posting", {
                 method: "post",
                 body: formData
@@ -63,10 +69,10 @@ const Dashboard = ({ setUpdate }) => {
 
 
     return (
-        <div title={`!! Donn't Upload Uncompressed or large-File/Videos\nit's take tooMuch time and can be rejected so donn't `} className='py-5 px-5 rounded-lg background bg-white w-full'>
+        <div title={`!! Donn't Upload Uncompressed or large-File/Videos\nit's take tooMuch time and can be rejected so donn't `} className='py-5 px-5 rounded-lg background bg-customwhite w-full'>
             <div className='w-full flex justify-between items-center gap-4'>
                 <div className="w-[15%]">
-                    <Profileimg />
+                    <Profileimg avater={User.avater}/>
                 </div>
 
                 <div className='py-1 pt-3 w-[70%]' >
@@ -106,7 +112,7 @@ const Dashboard = ({ setUpdate }) => {
             )}
             {
                 isPostButtonVisible && (<div className='tex-center py-3 flex justify-center w-full' >
-                    <button onClick={handleForm} className='px-3  w-[65%] mx-auto bg-sky-500 outline-none rounded text-white'>{isLoading ? "file is upLoading..." : "Post"}</button>
+                    <button onClick={handleForm} className='px-3  w-[65%] mx-auto bg-sky-500 outline-none rounded text-customwhite'>{isLoading ? "file is upLoading..." : "Post"}</button>
                 </div>)
             }
             {isModalOpen && (

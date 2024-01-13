@@ -9,20 +9,21 @@ import Navbar from './components/Navbar'
 // import Home from './pages/Home'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
+import Editpost from './components/Editpost'
 // import Testing from './pages/testin'
 
 function App() {
 document.title="/public/images/Singupimg.png"
 
   return (
-    <div className=" bg-slate-100 h-screen ">
+    <div className="  ">
     <Navbar/>
     <Routes>
-      {/* <Route path='/' element={<Testing/>}/> */}
       <Route path='/' element={<Home/>}/>
       <Route path='/profile' element={<Profile/>}/>
       <Route path='/login' element={<LogIn/>}/>
       <Route path='/signup' element={<Signup/>}/>
+      <Route path='/editpost/:postId'element={<Editpost/>}/>
     </Routes>
    
     </div>

@@ -9,18 +9,19 @@ const LogIn = () => {
 
     const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm()
     const login = async (data) => {
-console.log("request data", data)
+        console.log("request data", data)
         const response = await fetch("http://localhost:8000/api/v1/users/login",
             {
                 method: 'post',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
             })
-        if (!response.ok) {
-            console.log("the is issue in the response")
+        if (response.ok) {
+            const loginedres = await response.json()
+       
+            localStorage.setItem("User", JSON.stringify(loginedres))
         }
-        const loginedres = await response.json()
-        console.log(loginedres)
+
     }
     return (
         <>
@@ -43,10 +44,10 @@ console.log("request data", data)
                     </div>
                     {errors.password && <p className='text-red-500 mt-[-20px] mb-2 font-thin'>{errors.password.message}</p>}
                     <div className="w-full my-5  text-center">
-                        <input type="submit" value="LogIn" className= 'text-sm hover:bg-white duration-1000 hover:text-sky-500 border-2 border-sky-500 px-7 outline-none bg-sky-500 rounded text-white' />
-                    </div>  
+                        <input type="submit" value="LogIn" className='text-sm hover:bg-white duration-1000 hover:text-sky-500 border-2 border-sky-500 px-7 outline-none bg-sky-500 rounded text-white' />
+                    </div>
                     <p className=' my-53 text-center w-full text-sm  font-thin'>If you don't already have  <Link className='text-sky-600 underline' to="/signup"> SignUp </Link> !</p>
-              
+
 
 
 
@@ -57,4 +58,3 @@ console.log("request data", data)
 }
 
 export default LogIn
- 
