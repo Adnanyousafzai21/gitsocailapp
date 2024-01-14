@@ -40,7 +40,7 @@ const Editpost = ({ postId, isModalOpen, setIsModalOpen }) => {
       formData.append('description', description);
       formData.append('file', editpostSelectedFile);
       formData.append('user', User._id);
-      const response = await fetch(`/api/v1/posts/updatePost/${postId}`, {
+      const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts/updatePost/${postId}`, {
         method: 'post',
         body: formData,
       });
