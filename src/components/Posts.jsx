@@ -14,7 +14,7 @@ const Posts = ({ pupdate }) => {
     }, [pupdate])
     const getData = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/v1/posts/getPosts")
+            const response = await fetch("/api/v1/posts/getPosts")
             if (response.ok) {
                 const postData = await response.json()
                 setData(postData.posts.reverse())

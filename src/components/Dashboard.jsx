@@ -47,7 +47,7 @@ const Dashboard = ({ setUpdate }) => {
             formData.append('description', description)
             formData.append('file', selectedFile),
                 formData.append("user", User._id)
-            const response = await fetch("http://localhost:8000/api/v1/posts/Posting", {
+            const response = await fetch("/api/v1/posts/Posting", {
                 method: "post",
                 body: formData
             })

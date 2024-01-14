@@ -10,7 +10,7 @@ const LogIn = () => {
     const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm()
     const login = async (data) => {
         console.log("request data", data)
-        const response = await fetch("http://localhost:8000/api/v1/users/login",
+        const response = await fetch("/api/v1/users/login",
             {
                 method: 'post',
                 headers: { "Content-Type": "application/json" },
