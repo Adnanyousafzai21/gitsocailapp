@@ -26,7 +26,7 @@ const Posts = ({ pupdate }) => {
     return (
         <div className='w-full  bg-customwhite rounded-md my-2 py-2 px-5  '>
             {
-                data && data?.reverse().map((data) => {
+                data && data?.map((data) => {
                     return <div className='flex flex-col gap-2 my-3' key={data._id}>
                         <div className="flex justify-between"><ProfileTitle avater={data.user?.avater} fullname={data?.user?.fullname} time={data?.createdAt} />
                          <PostDeletUpdate postId={data._id}  /></div>
