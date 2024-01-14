@@ -66,7 +66,7 @@ const Editpost = ({ postId, isModalOpen, setIsModalOpen }) => {
   const getPost = async () => {
     try {
       setIsloading(true);
-      const response = await fetch(`/api/v1/posts/getForUpdate/${postId}`);
+      const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts/getForUpdate/${postId}`);
 
       if (response.ok) {
         const resdata = await response.json();
