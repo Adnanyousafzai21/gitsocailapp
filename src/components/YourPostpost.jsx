@@ -9,7 +9,7 @@ console.log(posts)
     const getYourPost = async () => {
 
         try {
-            const response = await fetch(`/api/v1/posts/getYourPost/659d612a662a0da1dbaab445`)
+            const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts/getYourPost/659d612a662a0da1dbaab445`)
 
             const yourpost = await response.json()
             setPosts(yourpost.yourPosts)

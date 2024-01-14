@@ -9,7 +9,7 @@ const [isModalOpen, setIsModalOpen]= useState(false)
   const deletePost = async (postId) => {
 
     try {
-      const response = await fetch(`/api/v1/posts/postDelete/${postId}`, {
+      const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts/postDelete/${postId}`, {
         method: 'delete'
       })
       if (response.ok) {

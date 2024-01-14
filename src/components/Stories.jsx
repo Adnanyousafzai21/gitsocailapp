@@ -15,7 +15,7 @@ const Stories = () => {
     }, [])
     const getData = async () => {
         try {
-            const response = await fetch("/api/v1/posts/getPosts")
+            const response = await fetch("https://socailmediaappapi.vercel.app/api/v1/posts/getPosts")
             if (response.ok) {
                 const postData = await response.json()
                 setData(postData.posts.reverse())

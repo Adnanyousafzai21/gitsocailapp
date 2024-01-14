@@ -16,7 +16,7 @@ const Signup = () => {
                 formData.append('avater', data.avater[0]);
                 console.log("sendign data to ",formData)
                 const { confirm_Password, ...datatosend } = data
-                const response =await fetch("/api/v1/users/register", {
+                const response =await fetch("https://socailmediaappapi.vercel.app/api/v1/users/register", {
                     method: "post",
                     // headers: {  "Content-Type": "multipart/form-data", },
                     body: formData,
