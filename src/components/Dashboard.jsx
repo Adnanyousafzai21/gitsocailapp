@@ -12,6 +12,7 @@ const Dashboard = ({ setUpdate }) => {
     const [previewUrl, setPreviewUrl] = useState(null);
     const [isLoading, setIsloading] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false);
+    console.log(selectedFile)
     const createObjectURL = (file) => {
         return file ? URL.createObjectURL(file) : null;
       };
@@ -47,6 +48,7 @@ const Dashboard = ({ setUpdate }) => {
             formData.append('description', description)
             formData.append('file', selectedFile),
                 formData.append("user", User._id)
+                console.log(formData.description)
             const response = await fetch("https://socailmediaappapi.vercel.app/api/v1/posts/Posting", {
                 method: "post",
                 body: formData
@@ -57,6 +59,7 @@ const Dashboard = ({ setUpdate }) => {
                 setDescription("")
                 setSelectedFile(null)
                 setUpdate((preve) => !preve)
+
             }
         } catch (error) {
             console.log("somthing wern rong", error)
@@ -69,7 +72,7 @@ const Dashboard = ({ setUpdate }) => {
 
 
     return (
-        <div title={`!! Donn't Upload Uncompressed or large-File/Videos\nit's take tooMuch time and can be rejected so donn't `} className='py-5 px-5 rounded-lg background bg-customwhite w-full'>
+        <div title={`!! Donn't Upload Uncompressed or large-File/Videos\nit's take tooMuch time and can be rejected so donn't `} className='py-5 px-5 rounded background bg-customwhite w-full'>
             <div className='w-full flex justify-between items-center gap-4'>
                 <div className="w-[15%]">
                     <Profileimg avater={User.avater}/>

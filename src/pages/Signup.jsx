@@ -1,8 +1,9 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-
+const navigate= useNavigate()
     const { register, handleSubmit, setValue, watch, reset, formState: { errors, isValid, } } = useForm()
     const signup =async (data) => {
         try {
@@ -18,7 +19,6 @@ const Signup = () => {
                 const { confirm_Password, ...datatosend } = data
                 const response =await fetch("https://socailmediaappapi.vercel.app/api/v1/users/register", {
                     method: "post",
-                    // headers: {  "Content-Type": "multipart/form-data", },
                     body: formData,
                 })
                 reset()
@@ -26,6 +26,8 @@ const Signup = () => {
                 if(response.ok){
                     const resdata= await response.json()
                     console.log("signup successfully ", resdata)
+                    // localStorage.setItem("User", JSON.stringify(resdata.createdUser))
+                    navigate("/login")
                 }
                 else{
                     const resdata= await response.text()

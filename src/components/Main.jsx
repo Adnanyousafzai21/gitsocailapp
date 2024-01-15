@@ -12,7 +12,7 @@ const Main = ({ children }) => {
   const location = useLocation()
 
   return (
-    <div className=' max-w-[800px]  flex flex-col py-2 gap-2 items-center md:items-start  md:flex-row m-auto  justify-center'>
+    <div className=' max-w-[900px]  flex flex-col bg-slate-200 py-2 gap-5 items-center md:items-start  md:flex-row m-auto  justify-center'>
       <div className={`md:w-[25%]  border w-[95%]
       ${isDesktopOrTablet && location.pathname === "/profile" ? "hidden" : ""} sticky top-14 md:block hidden`}>
         <Stories />

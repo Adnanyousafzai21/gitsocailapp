@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Signup from './Signup';
 
 const LogIn = () => {
-    // const navigate= useNavigate()
+    const navigate= useNavigate()
 
     const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm()
     const login = async (data) => {
@@ -20,6 +20,7 @@ const LogIn = () => {
             const loginedres = await response.json()
        
             localStorage.setItem("User", JSON.stringify(loginedres))
+            navigate("/")
         }
 
     }
