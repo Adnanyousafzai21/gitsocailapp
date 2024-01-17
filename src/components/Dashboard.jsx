@@ -49,7 +49,7 @@ const Dashboard = ({ setUpdate }) => {
             formData.append('file', selectedFile),
                 formData.append("user", User._id)
                 console.log(formData.description)
-            const response = await fetch("http://localhost:8000/api/v1/posts/Posting", {
+            const response = await fetch("https://socailmediaappapi.vercel.app/api/v1/posts/Posting", {
                 method: "post",
                 body: formData
             })
