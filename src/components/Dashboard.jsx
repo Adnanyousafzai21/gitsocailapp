@@ -39,7 +39,7 @@ const Dashboard = ({ setUpdate }) => {
                 setTimeout(() => {
                     setIsModalOpen(false);
                     Navigate("/login")
-                }, 10000);
+                }, 5000);
 
                 return;
             }
@@ -103,12 +103,12 @@ const Dashboard = ({ setUpdate }) => {
             </div>
 
             {selectedFile && (
-                <div className='duration-1000 w-full text-center'>
+                <div className='duration-1000 w-full text-center h-[350px]' >
                     {previewUrl && (
                         <img
                             src={previewUrl}
                             alt="Selected File Preview"
-                            className="max-w-full h-auto rounded-md  m-auto "
+                            className="max-w-full  my-2  rounded w-[80%] h-full  m-auto "
                         />
                     )}   <p className='text-skyblue-500'>{(selectedFile.name).slice(0, 15)}</p>
                 </div>

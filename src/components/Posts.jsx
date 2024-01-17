@@ -28,16 +28,16 @@ const Posts = ({ pupdate }) => {
                     return <div className='flex flex-col p-5 rounded bg-customwhite my-2' key={data._id}>
                         <div className="flex justify-between"><ProfileTitle avater={data.user?.avater} fullname={data?.user?.fullname} time={data?.createdAt} />
                          <PostDeletUpdate postId={data._id}  /></div>
-                        <p className={`px-2 text-[#333333] text-sm descrition ${!data?.file ? "bg-sky-300 w-full  my-1 flex items-center justify-center rounded  py-2 text-center text-customwhite min-h-36 max-h-48 overflow-hidden" : ""} `}>{data?.description}</p>
+                        <p className={`px-2 text-[#333333] text-sm descrition ${!data?.file ? "bg-sky-300 w-full  my-3 flex items-center justify-center rounded  py-2 text-center text-customwhite min-h-36 max-h-48 overflow-hidden" : "mt-3"} `}>{data?.description}</p>
                         <div>
                             {data?.file ? (
                                 data.file.includes('/video/') ? (
-                                    <video controls className='rounded h-64 w-full my-1'>
+                                    <video controls className='rounded h-64 w-full my-2'>
                                         <source src={data.file} type='video/mp4' />
                                         Your browser does not support the video tag.
                                     </video>
                                 ) : (
-                                    <img src={data.file} alt="" className='rounded h-64 w-full my-1' />
+                                    <img src={data.file} alt="" className='rounded h-64 w-full my-3' />
                                 )
                             ) : null} </div>
                         <div className=''>
