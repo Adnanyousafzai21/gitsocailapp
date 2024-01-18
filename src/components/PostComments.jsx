@@ -17,7 +17,7 @@ const PostComments = ({ comments, setUpdate, postId }) => {
             console.log(commentId)
             console.log(postId)
 
-            const response = await fetch(`http://localhost:8000/api/v1/posts/deleteComment/${postId}/${commentId}`, {
+            const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts/deleteComment/${postId}/${commentId}`, {
                 method: "delete"
             })
             if (response.ok) {
@@ -34,7 +34,7 @@ const PostComments = ({ comments, setUpdate, postId }) => {
     const postCommet = async() => {
         try {
             console.log("you hit the post commet")
-            const response =await fetch(`http://localhost:8000/api/v1/posts/addcomment/${postId}/comment`, {
+            const response =await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts/addcomment/${postId}/comment`, {
                 method: "post",
                 headers: {
                     'Content-Type': 'application/json',
