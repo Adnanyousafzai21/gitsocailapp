@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 import Profileimg from './Profileimg';
 
-const Editpost = ({ postId, isModalOpen, setIsModalOpen }) => {
+const Editpost = ({ postId, isModalOpen, setIsModalOpen, setUpdate }) => {
   useEffect(() => {
     Modal.setAppElement('#root');
   }, []);
@@ -50,7 +50,8 @@ const Editpost = ({ postId, isModalOpen, setIsModalOpen }) => {
         setDescription('');
         setEditpostSelectedFile(null);
         setIsModalOpen(false);
-        Navigate('/');
+        // Navigate('/')
+        setUpdate((previw)=>!previw)
       }
     } catch (error) {
       console.log('something went wrong', error);

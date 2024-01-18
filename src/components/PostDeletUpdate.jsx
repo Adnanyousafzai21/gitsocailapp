@@ -3,7 +3,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import Editpost from './Editpost';
 import { Link } from 'react-router-dom';
-const PostDeletUpdate = ({ postId,}) => {
+const PostDeletUpdate = ({ postId,setUpdate}) => {
 const [isModalOpen, setIsModalOpen]= useState(false)
 // console.log("editiing postid", postId)
   const deletePost = async (postId) => {
@@ -14,6 +14,7 @@ const [isModalOpen, setIsModalOpen]= useState(false)
       })
       if (response.ok) {
         console.log("delete successully", response)
+        setUpdate((preve) => !preve)
       }
     }
     catch (error) {
@@ -27,10 +28,10 @@ const [isModalOpen, setIsModalOpen]= useState(false)
   return (
     <div className='flex gap-2'>
   
-      <div title='Edit'className='text-sky-500'> <CiEdit onClick={()=>Edit(postId)} /> </div>
+      <div title='Edit'className='text-sky-500 rounded-full hover:bg-sky-500 hover:text-white duration-500 h-6 p-1'> <CiEdit onClick={()=>Edit(postId)} /> </div>
 
-     <div title='Delete'className='text-red-500'><MdOutlineDeleteOutline onClick={() => deletePost(postId)} /></div>
-     <div><Editpost postId={postId} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /></div>
+     <div title='Delete'className='text-red-500 rounded-full hover:bg-red-500 hover:text-white duration-100 h-6 p-1'><MdOutlineDeleteOutline onClick={() => deletePost(postId)} /></div>
+     <div><Editpost postId={postId} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} setUpdate={setUpdate}/></div>
  
      </div>
   )

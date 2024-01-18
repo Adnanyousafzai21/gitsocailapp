@@ -9,7 +9,7 @@ const Home = () => {
   return (
   <Main>
   <Dashboard setUpdate={setUpdate}/>
-  <Posts pupdate={update}/>
+  <Posts pupdate={update} setUpdate={setUpdate}/>
   </Main>
   )
 }
