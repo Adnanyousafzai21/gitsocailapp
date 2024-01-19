@@ -12,24 +12,25 @@ const Profile = () => {
 
   return (
     <>
-
       <div className="w-full m-auto h-full my-2 ">
         <div className="max-w-[300px] m-auto rounded-md   bg-white ">
           {user ?
             <div className='w-full  flex flex-col justify-center items-center gap-5 '>
-              <div className='w-full bg-sky-100 rounded h-28 '></div>
+              <div className='w-full bg-sky-200 h-28 '>
+                <p className='text-center text-white pt-3'>Your Profile</p>
+              </div>
               <div className='w-[25%] mt-[-60px] ml-[-50px] '>
-                <div className=' z-1  rounded-full overflow-hidden w-20 h-20 border border-sky-400'>
+                <div className=' z-1  rounded-full overflow-hidden w-20 h-20 border border-white'>
                   <Profileimg avater={User.avater} classname='w-20 h-20' />
                 </div>
               </div>
               <div className='px-3 text-center'>
                 <div className='capitalize'>{User.fullname}</div>
                 <div className=''>{User.email}</div>
-                <div className='text-sm text-sky-300 font-thin'>pass has been hidden</div>
+                <div className='text-sm  font-thin'>password has been hidden</div>
               </div>
               <div className=''>
-                <button className='rounded bg-sky-400 px-10 py-1 text-white  mb-3'>
+                <button className='rounded bg-sky-400 px-10 py-1 text-white text-sm  mb-3'>
                   Edit Your Profile </button>
               </div>
               {/* <div className='w-full px-3'>

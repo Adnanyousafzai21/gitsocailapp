@@ -6,7 +6,7 @@ import Signup from './pages/Signup'
 import LogIn from './pages/LogIn'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
-// import Home from './pages/Home'
+import AboutUs from './components/About'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import Editpost from './components/Editpost'
@@ -14,17 +14,18 @@ import Logout from './components/Logout'
 // import Testing from './pages/testin'
 
 function App() {
-document.title="/public/images/Singupimg.png"
+const [data, setData]= useState()
 
   return (
     <div className="  ">
-    <Navbar/>
+    <Navbar data={data}/>
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/profile' element={<Profile/>}/>
-      <Route path='/login' element={<LogIn/>}/>
+      <Route path='/login' element={<LogIn  setData={setData}/>}/>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/editpost/:postId'element={<Editpost/>}/>
+      <Route path='/about'element={<AboutUs/>}/>
       <Route path="/logout" element={<Logout/>}/>
     </Routes>
    

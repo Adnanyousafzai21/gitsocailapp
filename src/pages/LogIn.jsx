@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Signup from './Signup';
 import Modalmessage from '../components/Modal';
 
-const LogIn = () => {
+const LogIn = ({setData}) => {
     const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
 
@@ -28,6 +28,7 @@ const LogIn = () => {
                     setIsOpen(false)
                     navigate("/")
                 }, 3000);
+                setData(loginedres)
             }
         } catch (error) {
             console.log("there is problem while logining",error)
