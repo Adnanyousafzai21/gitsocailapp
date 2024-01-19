@@ -10,6 +10,7 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import Editpost from './components/Editpost'
+import Logout from './components/Logout'
 // import Testing from './pages/testin'
 
 function App() {
@@ -24,6 +25,7 @@ document.title="/public/images/Singupimg.png"
       <Route path='/login' element={<LogIn/>}/>
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/editpost/:postId'element={<Editpost/>}/>
+      <Route path="/logout" element={<Logout/>}/>
     </Routes>
    
     </div>

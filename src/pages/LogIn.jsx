@@ -1,28 +1,37 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import Signup from './Signup';
+import Modalmessage from '../components/Modal';
 
 const LogIn = () => {
-    const navigate= useNavigate()
+    const navigate = useNavigate()
+    const [isOpen, setIsOpen] = useState(false)
 
     const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm()
     const login = async (data) => {
-        console.log("request data", data)
-        const response = await fetch("https://socailmediaappapi.vercel.app/api/v1/users/login",
-            {
-                method: 'post',
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-        if (response.ok) {
-            const loginedres = await response.json()
-       
-            localStorage.setItem("User", JSON.stringify(loginedres))
-            navigate("/")
-        }
+        try {
 
+           setIsOpen(true)
+            const response = await fetch("https://socailmediaappapi.vercel.app/api/v1/users/login",
+                {
+                    method: 'post',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                })
+            if (response.ok) {
+                const loginedres = await response.json()
+
+                localStorage.setItem("User", JSON.stringify(loginedres))
+                setTimeout(() => {
+                    setIsOpen(false)
+                    navigate("/")
+                }, 3000);
+            }
+        } catch (error) {
+            console.log("there is problem while logining",error)
+        }
     }
     return (
         <>
@@ -47,12 +56,10 @@ const LogIn = () => {
                     <div className="w-full my-5  text-center">
                         <input type="submit" value="LogIn" className='text-sm hover:bg-white duration-1000 hover:text-sky-500 border-2 border-sky-500 px-7 outline-none bg-sky-500 rounded text-white' />
                     </div>
-                    <p className=' my-53 text-center w-full text-sm  font-thin'>If you don't already have  <Link className='text-sky-600 underline' to="/signup"> SignUp </Link> !</p>
-
-
-
-
+                    <p className=' my-53 text-center w-full text-sm  font-thin'>If you don't  have already <Link className='text-sky-600 underline font-normal ml-2' to="/signup"> SignUp </Link> !</p>
                 </form>
+
+                <Modalmessage isOpen={isOpen} message={`you are successfully loged In \n redirected to homepage`}onClose={() => setIsOpen(false)} />
             </div>
         </>
     )

@@ -8,7 +8,7 @@ import { BiLike } from 'react-icons/bi';
 import { TiDeleteOutline } from "react-icons/ti";
 const PostComments = ({ comments, setUpdate, postId }) => {
     const user = JSON.parse(localStorage.getItem("User"))
-    const userId = user.user._id
+    const userId = user && user.user._id
 
 
     const [hide, setHide] = useState(false)
@@ -76,7 +76,7 @@ return (
             {comments.map((comment) => {
                 return <div className="" key={comment._id} >
                     <div className=' my-1 flex justify-between items-center'>
-                        <ProfileTitle avater={comment?.user?.avater} fullname={comment.user.fullname} time={comment.createdAt} classname={"h-6 w-6"} />
+                        <ProfileTitle avater={comment?.user?.avater} fullname={comment.user.fullname} time={comment.createdAt} classname="h-7 w-7" />
                         {userId === comment.user._id ? <TiDeleteOutline className='text-red-500 hover:bg-red-500 hover:text-white rounded-full m-2' onClick={() => deletcomment(comment._id)} />
                             : ""}                   </div>
                     <p className='px-4 mx-6 py-1 text-sm bg-slate-50 rounded-md'>{comment.text}</p>

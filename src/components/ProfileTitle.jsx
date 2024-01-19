@@ -2,7 +2,7 @@ import React from 'react';
 import { format, differenceInMinutes, differenceInDays, formatDistanceToNow } from 'date-fns';
 import Profileimg from './Profileimg';
 
-const ProfileTitle = ({ avater, time="2024-01-18T07:49:43.261Z", fullname, className }) => {
+const ProfileTitle = ({ avater, time="2024-01-18T07:49:43.261Z", fullname, classname }) => {
 
   const postDate = new Date(time);
   const now = new Date();
@@ -25,7 +25,7 @@ const ProfileTitle = ({ avater, time="2024-01-18T07:49:43.261Z", fullname, class
 
   return (
     <div className="flex gap-1 items-center">
-      <div className=''><Profileimg avater={avater}  className={className}/></div>
+      <div className=''><Profileimg avater={avater}  classname={classname}/></div>
       <div>
         <div className='text-sm font-normal text-[#333333]'>{fullname}</div>
         <div className='postmargin text-sm font-light text-[#777777]'>{formattedTime}</div>

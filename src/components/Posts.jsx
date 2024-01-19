@@ -6,7 +6,8 @@ import PostDeletUpdate from './PostDeletUpdate'
 import { BsThreeDotsVertical } from "react-icons/bs";
 const Posts = ({ pupdate,setUpdate }) => {
     const user = JSON.parse(localStorage.getItem("User"))
-    const userId = user.user._id
+    const userId = user? user.user?._id:""
+    console.log(user)
   
     const [data, setData] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false);
