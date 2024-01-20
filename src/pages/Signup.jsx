@@ -3,17 +3,18 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Modalmessage from '../components/Modal';
+import { setDate } from 'date-fns';
 
-const Signup = () => {
+const Signup = ({}) => {
     const navigate = useNavigate()
      const { register, handleSubmit, reset, watch, formState: { errors, isValid } } = useForm()
 
      const [isOpen, setIsOpen] = useState(false)
 
-
+const [message, setMessage]= useState()
 
     console.log("this is the sign up page!!")
-    const Registeration = async (data) => {
+    const Registeration = async (setData) => {
         try {
             setIsOpen(true)
 
@@ -30,27 +31,31 @@ const Signup = () => {
             });
 
             reset();
-
+   const resdata = await response.json();
             if (response.ok) {
-                const resdata = await response.json();
-                console.log("signup successfully ", resdata);
+             
                 localStorage.setItem("User", JSON.stringify(resdata))
-                 setIsOpen(false)  
-                  navigate("/login");
-            
+                 setDate(resdata) 
+                  setMessage(resdata.message)
+                  setTimeout(() => {
+                    setIsOpen(false)
+                    navigate("/")
+                    setData(loginedres)
+                }, 3000);
+                
             } else {
-                const resdata = await response.text();
-                console.log("there is an error while responding ", resdata);
+                setMessage(resdata.message)
+                setTimeout(() => {
+                  setIsOpen(false)
+              }, 3000);
             }
         } catch (error) {
+        setMessage(error.message)
             console.log("there is an error while registration ", error);
         }
     };
 
 
-const clicked =()=>{
-    console.log("button clicked")
-}
 
 
     const handleFileChange = (e) => {
@@ -97,7 +102,7 @@ const clicked =()=>{
                     <input type="submit" value="Create Acoount" className='text-sm hover:bg-white duration-1000 hover:text-sky-500 border-2 border-sky-500 px-7 outline-none bg-sky-500 rounded text-white' />
                     </div>
                 </form>
-                <Modalmessage isOpen={isOpen} message={`you are successfully loged In \n redirected to homepage`} onClose={() => setIsOpen(false)} ariaHideApp={false} />
+                <Modalmessage isOpen={isOpen} message={`${message?message:"Your request for registration is being processed"}`} onClose={() => setIsOpen(false)} ariaHideApp={false} />
             </div>
 
 

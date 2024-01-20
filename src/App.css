@@ -45,3 +45,8 @@ body{
 .tranniii{
   transition: all 2s linear;
 }
+
+
+.md:hover {
+  background: none;
+}

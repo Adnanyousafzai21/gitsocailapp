@@ -7,6 +7,7 @@ import Modalmessage from '../components/Modal';
 
 const LogIn = ({setData}) => {
     const navigate = useNavigate()
+    const [message, setMessage]= useState()
     const [isOpen, setIsOpen] = useState(false)
 
     const { register, handleSubmit, reset, formState: { errors, isValid } } = useForm()
@@ -20,18 +21,32 @@ const LogIn = ({setData}) => {
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)
                 })
-            if (response.ok) {
                 const loginedres = await response.json()
-
+            if (response.ok) {
+                
+                 setMessage(loginedres.message)
+                console.log("message",loginedres.message)
                 localStorage.setItem("User", JSON.stringify(loginedres))
+               
                 setTimeout(() => {
                     setIsOpen(false)
                     navigate("/")
+                    setData(loginedres)
                 }, 3000);
-                setData(loginedres)
+                
+            }
+            else{
+                setMessage(loginedres.message)
+                setTimeout(() => {
+                  
+                    setIsOpen(false)
+                }, 5000);
+                
             }
         } catch (error) {
             console.log("there is problem while logining",error)
+            setMessage(error.message)
+            setIsOpen(false)
         }
     }
     return (
@@ -60,7 +75,7 @@ const LogIn = ({setData}) => {
                     <p className=' my-53 text-center w-full text-sm  font-thin'>If you don't  have already <Link className='text-sky-600 underline font-normal ml-2' to="/signup"> SignUp </Link> !</p>
                 </form>
 
-                <Modalmessage isOpen={isOpen} message={`you are successfully loged In \n redirected to homepage`}onClose={() => setIsOpen(false)} />
+                <Modalmessage isOpen={isOpen} message={`${message?message:"Your request for logining is being porccessed"}`}onClose={() => setIsOpen(false)} />
             </div>
         </>
     )

@@ -23,7 +23,7 @@ const [data, setData]= useState()
       <Route path='/' element={<Home/>}/>
       <Route path='/profile' element={<Profile/>}/>
       <Route path='/login' element={<LogIn  setData={setData}/>}/>
-      <Route path='/signup' element={<Signup/>}/>
+      <Route path='/signup' element={<Signup setData={setData}/>}/>
       <Route path='/editpost/:postId'element={<Editpost/>}/>
       <Route path='/about'element={<AboutUs/>}/>
       <Route path="/logout" element={<Logout/>}/>
