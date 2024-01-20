@@ -25,7 +25,6 @@ const LogIn = ({setData}) => {
             if (response.ok) {
                 
                  setMessage(loginedres.message)
-                console.log("message",loginedres.message)
                 localStorage.setItem("User", JSON.stringify(loginedres))
                
                 setTimeout(() => {

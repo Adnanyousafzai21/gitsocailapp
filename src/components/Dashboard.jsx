@@ -89,7 +89,7 @@ const Dashboard = ({ setUpdate }) => {
                     />
                 </div>
                 <div className='w-[15%] h-9 overflow-hidden rounded-md border-sky-500 border flex justify-center  items-center '>
-                    <label title='UploadImage' htmlFor="fileInput" className="cursor-pointer text-blue-500 text-2xl  ">
+                    <label title='UploadImage' htmlFor="fileInput" className="cursor-pointer text-blue-500 text-2xl  " disabled>
                         <MdOutlineInsertPhoto />
                     </label>
                     <input
@@ -97,7 +97,7 @@ const Dashboard = ({ setUpdate }) => {
                         type="file"
                         accept="image/*,video/*"
                         onChange={handleFileChange}
-                        className="hidden"
+                        className="hidden" disabled
                     />
                 </div>
             </div>

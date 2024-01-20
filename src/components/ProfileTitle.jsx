@@ -27,7 +27,7 @@ const ProfileTitle = ({ avater, time="2024-01-18T07:49:43.261Z", fullname, class
     <div className="flex gap-1 items-center">
       <div className=''><Profileimg avater={avater}  classname={classname}/></div>
       <div>
-        <div className='text-sm font-normal text-[#333333]'>{fullname}</div>
+        <div className='text-sm font-normal text-[#333333] ca'>{fullname}</div>
         <div className='postmargin text-sm font-light text-[#777777]'>{formattedTime}</div>
       </div>
     </div>
