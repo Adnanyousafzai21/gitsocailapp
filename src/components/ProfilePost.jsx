@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import CardPost from './CardPost'
-const ProfilePost = ({setUpdate,userId, setProdata}) => {
-    const user = JSON.parse(localStorage.getItem("User"))
+const ProfilePost = ({userId, setProdata}) => {
     const [data, setData] = useState([])
  
     console.log(data)
@@ -41,7 +40,6 @@ console.log("data readfjadla", Array.isArray(data))
                             avater={data?.user.avater}
                             fullname={data.user.fullname}
                             user_id={data.user._id}
-                            setUpdate={setUpdate}
                         />
                 })
             }

@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import Profileimg from '../components/Profileimg'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
-import YourPost from '../components/YourPost'
 import ProfilePost from './profilePost'
 
-const Otherprofile = (setUpdate) => {
+const Otherprofile = () => {
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem("User"))
     const userid = user && user._id
