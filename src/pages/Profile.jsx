@@ -1,11 +1,11 @@
 import React from 'react'
 import Profileimg from '../components/Profileimg'
-import GetYourPost from '../components/YourPostpost'
-import Main from '../components/Main'
-import ProfileTitle from '../components/ProfileTitle'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import YourPost from '../components/YourPost'
 
-const Profile = () => {
+const Profile = (setUpdate) => {
+  const location= useLocation()
+  const path = location.pathname
   const user = JSON.parse(localStorage.getItem("User"))
   const data = JSON.parse(localStorage.getItem("User"))
   const User = data?.user ? data?.user : ""
@@ -33,9 +33,9 @@ const Profile = () => {
                 <Link to={`/porfileEdit/${User._id}`} className='rounded bg-sky-400 px-10 py-1 text-white text-sm  mb-3'>
                   Edit Your Profile </Link>
               </div>
-              {/* <div className='w-full px-3'>
-                <GetYourPost />
-              </div> */}
+             {path=="/profile" && <div className='w-full px-3'>
+                <YourPost setUpdate />
+              </div>}
             </div>
 
             :

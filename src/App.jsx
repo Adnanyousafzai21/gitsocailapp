@@ -12,6 +12,9 @@ import Profile from './pages/Profile'
 import Editpost from './components/Editpost'
 import Logout from './components/Logout'
 import ProfileEdit from './components/ProfileEdit'
+import YourPost from './components/YourPost'
+import CardPost from './components/CardPost'
+import Otherprofile from './components/OtherProfile'
 // import Testing from './pages/testin'
 
 function App() {
@@ -28,7 +31,9 @@ const [data, setData]= useState()
       <Route path='/editpost/:postId'element={<Editpost/>}/>
       <Route path="/porfileEdit/:id" element={<ProfileEdit/>}/>
       <Route path='/about'element={<AboutUs/>}/>
+      <Route path='/postcard'element={<CardPost/> }/>
       <Route path="/logout" element={<Logout/>}/>
+      <Route path="/otherprofile/:userId" element={<Otherprofile />}/>
     </Routes>
    
     </div>

@@ -14,8 +14,8 @@ const Main = ({ children }) => {
 
   return (
     <div className=' max-w-[900px]  flex flex-col   gap-5 items-center md:items-start  md:flex-row m-auto  justify-center'>
-      <div className={`md:w-[25%]    w-[95%] hidden md:block sticky top-14  `}>
-        <Profile />
+      <div className={`md:w-[25%]    w-[100%] hidden md:block sticky top-14  `}>
+        <Profile  setUpdate/>
         </div>
       <div className='md:w-[40%]  w-[95%] py-2'>{children}</div>
       <div className='md:w-[25%] w-[95%]  sticky top-14 py-2 hidden md:block '>

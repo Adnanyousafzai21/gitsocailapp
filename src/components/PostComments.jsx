@@ -83,7 +83,7 @@ const PostComments = ({ comments, setUpdate, postId }) => {
                 </div>
             </div>
             <div className={`tranniii ${hide ? 'block' : 'hidden'} transition ease-in-out delay-150`}>
-                {comments.map((comment) => {
+                {comments && comments.map((comment) => {
                     return <div className="" key={comment._id} >
                         <div className=' my-1 flex justify-between items-center'>
                             <ProfileTitle avater={comment?.user?.avater} fullname={comment.user.fullname} time={comment.createdAt} classname="h-7 w-7" />
