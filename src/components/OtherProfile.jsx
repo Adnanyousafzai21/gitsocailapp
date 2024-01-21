@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import Profileimg from '../components/Profileimg'
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
-import ProfilePost from './profilePost'
+import ProfilePost from './Porfilepost'
+
 
 const Otherprofile = () => {
+    const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem("User"))
     const userid = user && user._id
     const params = useParams()
@@ -14,6 +16,9 @@ const Otherprofile = () => {
     const { userId } = params
     return (
         <>
+        {
+            userId===userid? navigate("/profile")
+            :
             <div className="w-full m-auto h-full my-2 ">
                 <div className="max-w-[300px] m-auto rounded-md   bg-white ">
                     <div className='w-full  flex flex-col justify-center items-center gap-5 '>
@@ -34,6 +39,8 @@ const Otherprofile = () => {
                     </div>
                 </div>
             </div>
+        }
+            
 
 
 
