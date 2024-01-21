@@ -29,9 +29,9 @@ const Profile = () => {
                 <div className=''>{User.email}</div>
                 <div className='text-sm  font-thin'>password has been hidden</div>
               </div>
-              <div className=''>
-                <button className='rounded bg-sky-400 px-10 py-1 text-white text-sm  mb-3'>
-                  Edit Your Profile </button>
+              <div className='mb-3'>
+                <Link to={`/porfileEdit/${User._id}`} className='rounded bg-sky-400 px-10 py-1 text-white text-sm  mb-3'>
+                  Edit Your Profile </Link>
               </div>
               {/* <div className='w-full px-3'>
                 <GetYourPost />
@@ -43,10 +43,10 @@ const Profile = () => {
               <h1 className='text-sky-700 font-bold'>You are not register yet</h1>
               <p className='text-sky-500  my-3 text-center text-sm'>
                  
-                please register yourself so that you will be able to share post, comment, like, and other activities
+                please register yourself so that you will be able to share post, comment, like, and other activities  </p>
                <p className='text-red-400'> Profile will be showing here only you can see your porfile don't worry!!</p>
                <p className='text-sky-500'>you can delete, update your  post and  comment </p>
-              </p>
+            
               <div className='text-center'>
                 <Link to="/login" className='text-sky-500 underline'>Login here</Link>
               </div>

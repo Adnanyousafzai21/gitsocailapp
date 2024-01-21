@@ -11,6 +11,7 @@ import Home from './pages/Home'
 import Profile from './pages/Profile'
 import Editpost from './components/Editpost'
 import Logout from './components/Logout'
+import ProfileEdit from './components/ProfileEdit'
 // import Testing from './pages/testin'
 
 function App() {
@@ -25,6 +26,7 @@ const [data, setData]= useState()
       <Route path='/login' element={<LogIn  setData={setData}/>}/>
       <Route path='/signup' element={<Signup setData={setData}/>}/>
       <Route path='/editpost/:postId'element={<Editpost/>}/>
+      <Route path="/porfileEdit/:id" element={<ProfileEdit/>}/>
       <Route path='/about'element={<AboutUs/>}/>
       <Route path="/logout" element={<Logout/>}/>
     </Routes>

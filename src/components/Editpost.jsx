@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MdOutlineInsertPhoto } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
+
 import Profileimg from './Profileimg';
 
 const Editpost = ({ postId, isModalOpen, setIsModalOpen, setUpdate }) => {
@@ -51,7 +52,7 @@ const Editpost = ({ postId, isModalOpen, setIsModalOpen, setUpdate }) => {
         setEditpostSelectedFile(null);
         setIsModalOpen(false);
         // Navigate('/')
-        setUpdate((previw)=>!previw)
+        setUpdate((prev) => !prev);
       }
     } catch (error) {
       console.log('something went wrong', error);
