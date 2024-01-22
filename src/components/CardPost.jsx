@@ -8,7 +8,7 @@ const user = JSON.parse(localStorage.getItem("User"))
     const userId = user && user.user._id
     return (
         <div className='w-full '>
-            <div className='flex flex-col py-5 rounded bg-customwhite my-2' key={id}>
+            <div className='flex flex-col rounded bg-customwhite my-2' key={id}>
                 <div className="flex justify-between px-5"><ProfileTitle avater={avater} fullname={fullname} time={time} />
                     {user_id === userId ? <PostDeletUpdate postId={id} setUpdate={setUpdate} /> : <BsThreeDotsVertical title="This is not your post you cann't either delete or edit!!"
                     />}   </div>

@@ -17,10 +17,10 @@ const Otherprofile = () => {
     return (
         <>
         {
-            userId===userid? navigate("/profile")
+            !userId===userid? navigate("/profile")
             :
             <div className="w-full m-auto h-full my-2 ">
-                <div className="max-w-[300px] m-auto rounded-md   bg-white ">
+                <div className="max-w-[350px] m-auto   bg-white ">
                     <div className='w-full  flex flex-col justify-center items-center gap-5 '>
                         <div className='w-full bg-sky-200 h-28 '>
                             <p className='text-center text-white pt-3'>Your Profile</p>
@@ -33,7 +33,8 @@ const Otherprofile = () => {
                         <div className='px-3 text-center'>
                             <div className='capitalize'>{prodata.fullname}</div>
                         </div>
-                        <div className='w-full  ml-[-4]'>
+                        <div className='w-full h-2 bg-slate-50'></div>
+                        <div className='w-full  '>
                             <ProfilePost userId={userId} setProdata={setProdata} />
                         </div>
                     </div>

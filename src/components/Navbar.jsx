@@ -21,7 +21,7 @@ const Navbar = ({data}) => {
             <div className=' max-w-[900px]   py-3 mx-auto '>
                 <div className='flex justify-between  px-5 relative'>
                     <div className="">
-                        <Profileimg />
+                <h2 className='text-xl font-bold text-sky-500 '>SocialNetwork</h2>
                     </div>
                     <ul className={` px-20 md:px-0 lg:pl-0 duration-500 text-center lg:flex absolute lg:static lg:justify-center lg:mt-auto ${isOpen?'mt-[60px] opacity-[100%]':'mt-[-200px] opacity-0 '} itmes-center w-full left-0 gap-10  lg:gap-3 bg-white z-[10] py-5 lg:py-0 pl-11  lg:mt-auto lg:flex-row lg:w-auto lg:opacity-100 `}>
                     <li className={`my-2 ${isOpen?"hover:bg-sky-500 hover:text-white":""}  duration-500  width-[50%] mx-auto`}>
@@ -40,7 +40,7 @@ const Navbar = ({data}) => {
                                 <Link to="/logout" className="py-2 ">logout</Link>
                             </li>)}
                     </ul>
-                    <div className='text-sky-500 md:hidden text-3xl mt-2'>
+                    <div className='text-sky-500 md:hidden text-3xl '>
                 {isOpen?<RxCross2   onClick={()=>setIsOpen((open)=>!open)}/>:<IoReorderThreeOutline onClick={()=>setIsOpen((open)=>!open)}  />    }
                     </div>
 

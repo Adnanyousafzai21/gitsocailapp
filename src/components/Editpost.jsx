@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MdOutlineInsertPhoto } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
-
+import { RxCross2 } from "react-icons/rx";
 import Profileimg from './Profileimg';
 
 const Editpost = ({ postId, isModalOpen, setIsModalOpen, setUpdate }) => {
@@ -111,14 +111,19 @@ const Editpost = ({ postId, isModalOpen, setIsModalOpen, setUpdate }) => {
   if (window.innerWidth < 800) {
     customModalStyles.content.width = '90%';
   }
-
+const Rxcorss=()=>{
+  setIsModalOpen(false)
+}
   return (
     <>
       <Modal isOpen={isModalOpen} style={customModalStyles} onClose={() => setIsModalOpen(false)}>
-        <div
+
+         <div
           title={`!! Donn't Upload Uncompressed or large-File/Videos\nit's take tooMuch time and can be rejected so donn't `}
-          className=' rounded-lg md:w-full   mx-auto'
+          className=' rounded-lg md:w-full   mx-auto relative'
         >
+           <div className='  my-2 p-5 mt-[-50px] flex justify-center '><RxCross2 onClick={Rxcorss} className=' hover:bg-red-500 hover:text-white text-center  text-red-500 font-bold  my-3 rounded-full m-3 w-5 h-5' /></div>
+      
           <div className='  flex justify-center items-center gap-4'>
             <Profileimg avater={User.avater}/>
             <div className='py-1 pt-3 w-[70%]'>

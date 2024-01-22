@@ -17,7 +17,7 @@ const Main = ({ children }) => {
       <div className={`md:w-[25%]    w-[100%] hidden md:block sticky top-14  `}>
         <Profile  setUpdate/>
         </div>
-      <div className='md:w-[40%]  w-[95%] py-2'>{children}</div>
+      <div className='md:w-[40%]  w-[100%] py-2'>{children}</div>
       <div className='md:w-[25%] w-[95%]  sticky top-14 py-2 hidden md:block '>
         <Features />
       </div>

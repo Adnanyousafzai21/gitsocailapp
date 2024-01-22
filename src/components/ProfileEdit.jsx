@@ -1,6 +1,8 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
+import { RxCross2 } from "react-icons/rx";
+
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { setDate } from 'date-fns';
@@ -75,9 +77,15 @@ const ProfileEdit = () => {
     if (window.innerWidth < 800) {
         customModalStyles.content.width = '90%';
     }
+    const Rxcorss= ()=>{
+        setIsOpen(false)
+        navigate(-1)
+    }
     return (
         <Modal style={customModalStyles} isOpen={isOpen} onClose={() => setIsOpen(false)} ariaHideApp={false}>
-            <div className="w-[100%]  px-4 py-5 flex items-center justify-center h-min-screen ">
+            <div className="w-[100%]  px-4 py-5 flex flex-col items-center justify-center h-min-screen ">
+            <div className='  my-2 p-5  mr-[-100] text-end'><RxCross2 onClick={Rxcorss} className=' hover:bg-red-500 hover:text-white text-center  text-red-500 font-bold  my-3 rounded-full m-3 w-5 h-5' /></div>
+      
                 <form onSubmit={handleSubmit(updateProfile)} className=' w-full  bg-white py-7 rounded-md'>
 
                     <div className='w-full my-3 '>
