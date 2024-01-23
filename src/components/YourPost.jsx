@@ -22,19 +22,21 @@ const YourPost = ({ setUpdate }) => {
         <div>
             {
                 Array.isArray(data) && data.map((data) => {
-                    return (<> <CardPost id={data?._id}
-                        key={data._id}
-                        time={data.createdAt}
-                        comments={data?.comments}
-                        file={data?.file}
-                        description={data?.description}
-                        avater={data?.user.avater}
-                        fullname={data.user.fullname}
-                        user_id={data.user._id}
-                        setUpdate={setUpdate}
-                    />
-                        <div className='w-full h-2 bg-slate-50'></div>
-                    </>)
+                    return (
+                        <div    >
+                            <CardPost  key={data._id}
+                             id={data?._id}
+                                time={data.createdAt}
+                                comments={data?.comments}
+                                file={data?.file}
+                                description={data?.description}
+                                avater={data?.user.avater}
+                                fullname={data.user.fullname}
+                                user_id={data.user._id}
+                                setUpdate={setUpdate}
+                            />
+                            <div className='w-full h-2 bg-slate-50'></div>
+                        </div>)
                 })
             }
 

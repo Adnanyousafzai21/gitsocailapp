@@ -7,11 +7,12 @@ import ProfileTitle from './ProfileTitle';
 import { BiLike } from 'react-icons/bi';
 import { TiDeleteOutline } from "react-icons/ti";
 import Modalmessage from './Modal';
-const PostComments = ({ comments, setUpdate, postId }) => {
+const PostComments = ({ comments, setUpdate, postId, likes }) => {
     const user = JSON.parse(localStorage.getItem("User"))
     const userId = user && user.user._id
     const [hide, setHide] = useState(false)
-    const [isOpen, setIsOpen]= useState(false)
+    const [isOpen, setIsOpen] = useState(false)
+    const [liked, setLiked]= useState(false)
     const deletcomment = async (commentId) => {
         try {
 
@@ -32,17 +33,13 @@ const PostComments = ({ comments, setUpdate, postId }) => {
 
     const postCommet = async () => {
         try {
+            if (!user) {
 
-
-
-         
-        if(!user){
-
-            setIsOpen(true)
-            setTimeout(() => {
-             setIsOpen(false)   
-            }, 3000);
-        }
+                setIsOpen(true)
+                setTimeout(() => {
+                    setIsOpen(false)
+                }, 3000);
+            }
             console.log("you hit the post commet")
             const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts/addcomment/${postId}/comment`, {
                 method: "post",
@@ -60,13 +57,34 @@ const PostComments = ({ comments, setUpdate, postId }) => {
             console.log("error while posting comoment", error)
         }
     }
+
+    const ToggleLike = async () => {
+        try {
+        
+            const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts//likeToggling/${postId}/${userId}`, {
+                method: "post"
+            })
+            if (response.ok) {
+                console.log("add succesfully")
+                setUpdate((preve) => !preve)
+                setLiked(true)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+
     return (
         <div className=''>
             <div className='flex justify-between mx-2 pb-1'>
                 <div className='flex gap-2'>
-                    <span className='text-sm text-sky-500 curser-pointer'>
-                        <BiSolidLike />
+
+                    <span className='curser-pointer text-md flex items-center'>
+                        {likes && likes.length > 0 && likes.length}  <BiSolidLike className='text-md text-sky-500 ' />
                     </span>
+
                 </div>
                 < div className='flex gap-2 items-center'>
                     <span className='text-sm hover:text-sky-500 pointer' onClick={() => setHide((prive) => !prive)}>{comments && comments.length > 0 ? comments.length : ""} comments
@@ -75,7 +93,7 @@ const PostComments = ({ comments, setUpdate, postId }) => {
             </div>
             <div className='flex justify-between border border-y-slate-300 border-x-0 py-1  px-4'>
                 <div className='flex gap-2'>
-                    <span className='text-2xl hover:text-sky-500 curser-pointer'> <GoThumbsup /> </span>
+                    <span className={`text-2xl hover:text-sky-500 curser-pointer ${liked?"text-sky-blue":"" }`} onClick={ToggleLike}> <GoThumbsup /> </span>
                 </div>
                 < div className='flex gap-2 items-center'>
                     <span className='text-2xl hover:text-sky-500 pointer'><FaRegComment onClick={() => setHide((prive) => !prive)} />

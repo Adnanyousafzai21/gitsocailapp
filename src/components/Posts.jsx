@@ -46,7 +46,7 @@ const Posts = ({ pupdate,setUpdate }) => {
                                 )
                             ) : null} </div>
                         <div className='px-5'>
-                            <PostComments comments={data?.comments} setUpdate={setUpdate} postId={data._id}/>
+                            <PostComments comments={data?.comments} setUpdate={setUpdate} likes={data?.likes} postId={data._id}/>
                         </div>
                     </div>
                 })
