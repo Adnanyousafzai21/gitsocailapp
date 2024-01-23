@@ -61,13 +61,13 @@ const PostComments = ({ comments, setUpdate, postId, likes }) => {
     const ToggleLike = async () => {
         try {
         
-            const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts//likeToggling/${postId}/${userId}`, {
+            const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts/likeToggling/${postId}/${userId}`, {
                 method: "post"
             })
             if (response.ok) {
                 console.log("add succesfully")
                 setUpdate((preve) => !preve)
-                setLiked(true)
+                setLiked((liked)=>!liked)
             }
         } catch (error) {
             console.log(error)
