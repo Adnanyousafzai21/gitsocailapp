@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
 import Signup from './Signup';
 import Modalmessage from '../components/Modal';
+import { IoEyeOutline } from "react-icons/io5";
+import { IoEyeOffOutline } from "react-icons/io5";
 
 const LogIn = ({setData}) => {
     const navigate = useNavigate()
@@ -48,6 +50,7 @@ const LogIn = ({setData}) => {
             setIsOpen(false)
         }
     }
+    const [show , setshow]=useState(true)
     return (
         <>
             <div className="bg-slate-100 w-[100%]  py-8 ">
@@ -65,7 +68,10 @@ const LogIn = ({setData}) => {
                         <label htmlFor="password">
                             Password:
                         </label>
-                        <input autoComplete='off' type="password" {...register('password', { required: 'Password is required*' })} className='w-full px-6 py-1 border-0 border-b outline-none' />
+                        <div className='flex'> 
+                        <input autoComplete='off' type={`${show?"password":"text"}`}{...register('password', { required: 'Password is required*' })} className='w-full px-6 py-1 border-0 border-b outline-none' />
+                         { show?<IoEyeOutline onClick={()=>setshow((prev)=>!prev)}/>:<IoEyeOffOutline onClick={()=>setshow((prev)=>!prev)}/>}
+                        </div>
                     </div>
                     {errors.password && <p className='text-red-500 mt-[-20px] mb-2 font-thin'>{errors.password.message}</p>}
                     <div className="w-full my-5  text-center">

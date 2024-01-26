@@ -12,7 +12,7 @@ const PostComments = ({ comments, setUpdate, postId, likes }) => {
     const userId = user && user.user._id
     const [hide, setHide] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
-    const [liked, setLiked]= useState(false)
+    const [liked, setLiked] = useState(false)
     const deletcomment = async (commentId) => {
         try {
 
@@ -60,15 +60,23 @@ const PostComments = ({ comments, setUpdate, postId, likes }) => {
 
     const ToggleLike = async () => {
         try {
-        
-            const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts/likeToggling/${postId}/${userId}`, {
-                method: "post"
-            })
-            if (response.ok) {
-                console.log("add succesfully")
-                setUpdate((preve) => !preve)
-                setLiked((liked)=>!liked)
+            if (!user) {
+
+                setIsOpen(true)
+                setTimeout(() => {
+                    setIsOpen(false)
+                }, 3000);
+            } else {
+                const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts/likeToggling/${postId}/${userId}`, {
+                    method: "post"
+                })
+                if (response.ok) {
+                    console.log("add succesfully")
+                    setUpdate((preve) => !preve)
+                    setLiked((liked) => !liked)
+                }
             }
+
         } catch (error) {
             console.log(error)
         }
@@ -93,7 +101,7 @@ const PostComments = ({ comments, setUpdate, postId, likes }) => {
             </div>
             <div className='flex justify-between border border-y-slate-300 border-x-0 py-1  px-4'>
                 <div className='flex gap-2'>
-                    <span className={`text-2xl hover:text-sky-500 curser-pointer ${liked?"text-sky-blue":"" }`} onClick={ToggleLike}> <GoThumbsup /> </span>
+                    <span className={`text-2xl hover:text-sky-500 curser-pointer ${liked ? "text-sky-blue" : ""}`} onClick={ToggleLike}> <GoThumbsup /> </span>
                 </div>
                 < div className='flex gap-2 items-center'>
                     <span className='text-2xl hover:text-sky-500 pointer'><FaRegComment onClick={() => setHide((prive) => !prive)} />

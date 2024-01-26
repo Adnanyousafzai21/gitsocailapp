@@ -10,7 +10,7 @@ const Navbar = ({data}) => {
     const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('User')));
   const handleLogout = () => {
     localStorage.removeItem('User');
-    Navigate("/")
+    Navigate("/login")
     setUser(null);
     setIsOpen(false)
   };
@@ -22,9 +22,9 @@ const Navbar = ({data}) => {
             <div className=' max-w-[900px]   py-3 mx-auto '>
                 <div className='flex justify-between  px-5 relative'>
                     <div className="">
-                <h2 className='text-xl font-bold text-sky-500 '>SocialNetwork</h2>
+                <h2 className='mx:text-xl text-normal font-bold text-sky-500 '>SocialNetwork</h2>
                     </div>
-                    <ul className={` px-20 md:px-0 lg:pl-0 duration-500 text-center lg:flex absolute lg:static lg:justify-center lg:mt-auto ${isOpen?'mt-[60px] opacity-[100%]':'mt-[-200px] opacity-0 '} itmes-center w-full left-0 gap-10  lg:gap-3 bg-white z-[10] py-5 lg:py-0 pl-11  lg:mt-auto lg:flex-row lg:w-auto lg:opacity-100 `}>
+                    <ul className={` px-20 md:px-0 lg:pl-0 duration-500 text-center lg:flex absolute lg:static lg:justify-center lg:mt-auto ${isOpen?'mt-[60px] opacity-[100%]':'mt-[-200px] opacity-0 '} itmes-center w-full left-0 gap-15  lg:gap-3 bg-white z-[10] py-5 lg:py-0 pl-11  lg:mt-auto lg:flex-row lg:w-auto lg:opacity-100 `}>
                     <li className={`my-2 ${isOpen?"hover:bg-sky-500 hover:text-white":""}  duration-500  width-[50%] mx-auto`} onClick={()=>setIsOpen(false)}>
                             <Link to="/" className="py-2 ">Home</Link>
                         </li>

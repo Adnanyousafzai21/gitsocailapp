@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Modalmessage from '../components/Modal';
 import { setDate } from 'date-fns';
 
+
 const Signup = ({}) => {
     const navigate = useNavigate()
      const { register, handleSubmit, reset, watch, formState: { errors, isValid } } = useForm()
@@ -77,10 +78,13 @@ const [message, setMessage]= useState()
                         <input type="email"  {...register('email', { required: "email is required" })} className='w-full px-2 md:px-6  border-0 border-b outline-none  ' />
                     </div>
                     {errors.email && <p className='text-red-500 mt-[-20px] mb-2 font-thin'>{errors.email.message}</p>}
-                    <div className='w-full my-3 '>
+                    <div className='w-full my-3'>
                         <label className='' htmlFor="">Password:</label>
+                     
                         <input
-                            type="password"  {...register('password', { required: "password is required" })} className='w-full px-2 md:px-6  border-0 border-b outline-none' autoComplete="off" />
+                            type="password"  {...register('password', { required: "password is required" })} className='w-full px-2 md:px-6  border-0 border-b outline-none' autoComplete="off" /><IoEyeOutline/>
+                      
+                       
                     </div>
                     {errors.password && <p className='text-red-500 mt-[-20px] mb-2 font-thin'>{errors.password.message}</p>}
                     <div className='w-full my-3'>
