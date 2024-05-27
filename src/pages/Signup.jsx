@@ -82,7 +82,7 @@ const [message, setMessage]= useState()
                         <label className='' htmlFor="">Password:</label>
                      
                         <input
-                            type="password"  {...register('password', { required: "password is required" })} className='w-full px-2 md:px-6  border-0 border-b outline-none' autoComplete="off" /><IoEyeOutline/>
+                            type="password"  {...register('password', { required: "password is required" })} className='w-full px-2 md:px-6  border-0 border-b outline-none' autoComplete="off" />
                       
                        
                     </div>
