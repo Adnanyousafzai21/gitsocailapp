@@ -6,6 +6,7 @@ import { RxCross2 } from "react-icons/rx";
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { setDate } from 'date-fns';
+import cloudinaryUpload from './cloudinay';
 const ProfileEdit = () => {
     const user = JSON.parse(localStorage.getItem("User"))
     const userId = user && user.user._id
@@ -17,19 +18,21 @@ const ProfileEdit = () => {
 
     const updateProfile = async (data) => {
         try {
-
-            console.log("this is the sign up page!!")
-            // setIsOpen(true)
+            const file = data.avater[0]
+            const avater = await cloudinaryUpload(file)
+            console.log("avater is here", avater)
             const formData = new FormData();
             formData.append('fullname', data.fullname);
             formData.append('email', data.email);
             formData.append('currentPassword', data.current_password);
             formData.append('newPassword', data.new_Password);
+            formData.append("avater", avater)
             const { confirm_Password, ...datatosend } = data;
             const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/users/updateProfile/${userId}`, {
                 method: "post",
                 body: formData,
             });
+
             reset();
             const resdata = await response.json();
             console.log(resdata)
@@ -45,10 +48,7 @@ const ProfileEdit = () => {
             console.log("there is an error while registration ", error);
         }
     };
-    const handleFileChange = (e) => {
-        const file = e.target?.files?.[0]
-        setValue("avater", file)
-    }
+
 
     const customModalStyles = {
         overlay: {
@@ -77,15 +77,15 @@ const ProfileEdit = () => {
     if (window.innerWidth < 800) {
         customModalStyles.content.width = '90%';
     }
-    const Rxcorss= ()=>{
+    const Rxcorss = () => {
         setIsOpen(false)
         navigate(-1)
     }
     return (
         <Modal style={customModalStyles} isOpen={isOpen} onClose={() => setIsOpen(false)} ariaHideApp={false}>
             <div className="w-[100%]  px-4 py-5 flex flex-col items-center justify-center h-min-screen ">
-            <div className='  my-2 p-5  mr-[-100] text-end'><RxCross2 onClick={Rxcorss} className=' hover:bg-red-500 hover:text-white text-center  text-red-500 font-bold  my-3 rounded-full m-3 w-5 h-5' /></div>
-      
+                <div className='  my-2 p-5  mr-[-100] text-end'><RxCross2 onClick={Rxcorss} className=' hover:bg-red-500 hover:text-white text-center  text-red-500 font-bold  my-3 rounded-full m-3 w-5 h-5' /></div>
+
                 <form onSubmit={handleSubmit(updateProfile)} className=' w-full  bg-white py-7 rounded-md'>
 
                     <div className='w-full my-3 '>
@@ -124,7 +124,7 @@ const ProfileEdit = () => {
                     <div className='w-full my-3 gap-3' title={`profile image is disabaled temrarly for security reson not required ,\n without create account!`}>
                         <label className='' htmlFor="">Profile photo:</label>
                         <input autoComplete='off' type="file" name="avater"
-                            onChange={handleFileChange}  {...register('avater')} className='w-full px-2 md:px-6  border-0 border-b outline-none  ' disabled />
+                            {...register('avater')} className='w-full px-2 md:px-6  border-0 border-b outline-none' />
                     </div>
                     <div className='w-[100%]   flex items-center mb-7 flex-col'>
 

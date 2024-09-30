@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 import { RxCross2 } from "react-icons/rx";
 import Profileimg from './Profileimg';
+import cloudinaryUpload from './cloudinay';
 
 const Editpost = ({ postId, isModalOpen, setIsModalOpen, setUpdate }) => {
   useEffect(() => {
@@ -12,18 +13,18 @@ const Editpost = ({ postId, isModalOpen, setIsModalOpen, setUpdate }) => {
 
   const Navigate = useNavigate();
   const data = JSON.parse(localStorage.getItem('User'));
-  const User = data?.user?data?.user:""
+  const User = data?.user ? data?.user : ""
 
   const [editpostSelectedFile, setEditpostSelectedFile] = useState(null);
   const [editpostPreviewUrl, setEditpostPreviewUrl] = useState(null);
 
   const [isLoading, setIsloading] = useState(false);
- 
+
   const handelDocChange = (event) => {
     console.log(event)
     const file = event.target?.files[0];
     setEditpostSelectedFile(file);
-    const preview= URL.createObjectURL(file)
+    const preview = URL.createObjectURL(file)
     setEditpostPreviewUrl(preview);
   };
 
@@ -36,14 +37,23 @@ const Editpost = ({ postId, isModalOpen, setIsModalOpen, setUpdate }) => {
 
   const handleForm = async () => {
     try {
+      console.log("the file is bieng hited");
       setIsloading(true);
-      let formData = new FormData();
-      formData.append('description', description);
-      formData.append('file', editpostSelectedFile);
-      formData.append('user', User._id);
+      const file = await cloudinaryUpload(editpostSelectedFile);
+
+      const payload = {
+        description: description,
+        file: file,
+        user: User._id
+      }
+
+      console.log("Cloudinary upload result:", payload);
       const response = await fetch(`https://socailmediaappapi.vercel.app/api/v1/posts/updatePost/${postId}`, {
         method: 'post',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json'
+      },
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
@@ -60,7 +70,6 @@ const Editpost = ({ postId, isModalOpen, setIsModalOpen, setUpdate }) => {
       setIsloading(false);
     }
   };
-
   useEffect(() => {
     getPost();
   }, [postId]);
@@ -111,21 +120,21 @@ const Editpost = ({ postId, isModalOpen, setIsModalOpen, setUpdate }) => {
   if (window.innerWidth < 800) {
     customModalStyles.content.width = '90%';
   }
-const Rxcorss=()=>{
-  setIsModalOpen(false)
-}
+  const Rxcorss = () => {
+    setIsModalOpen(false)
+  }
   return (
     <>
       <Modal isOpen={isModalOpen} style={customModalStyles} onClose={() => setIsModalOpen(false)}>
 
-         <div
+        <div
           title={`!! Donn't Upload Uncompressed or large-File/Videos\nit's take tooMuch time and can be rejected so donn't `}
           className=' rounded-lg md:w-full   mx-auto relative'
         >
-           <div className='  my-2 p-5 mt-[-50px] flex justify-center '><RxCross2 onClick={Rxcorss} className=' hover:bg-red-500 hover:text-white text-center  text-red-500 font-bold  my-3 rounded-full m-3 w-5 h-5' /></div>
-      
+          <div className='  my-2 p-5 mt-[-50px] flex justify-center '><RxCross2 onClick={Rxcorss} className=' hover:bg-red-500 hover:text-white text-center  text-red-500 font-bold  my-3 rounded-full m-3 w-5 h-5' /></div>
+
           <div className='  flex justify-center items-center gap-4'>
-            <Profileimg avater={User.avater}/>
+            <Profileimg avater={User.avater} />
             <div className='py-1 pt-3 w-[70%]'>
               <input
                 onChange={update}
@@ -147,7 +156,7 @@ const Rxcorss=()=>{
           {editpostSelectedFile && (
             <div className='duration-1000 w-[60%]  overflow-hidden min-h-9 mx-auto'>
               {editpostPreviewUrl && (
-                <img src={editpostPreviewUrl} alt='Selected File Preview' className='w-full h-auto rounded-md  m-auto ' />
+                <img src={editpostPreviewUrl} alt='Selected File Preview' className='w-full  rounded-md  m-auto ' />
               )}
             </div>
           )}

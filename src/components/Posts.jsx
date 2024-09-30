@@ -26,14 +26,13 @@ const Posts = ({ pupdate,setUpdate }) => {
             console.log(error)
         }
     }
-    const [follow, setfollow]=useState(false)
     return (
         <div className='w-full '>
             {
                 data && data?.map((data) => {
                     return <div className='flex flex-col py-5 rounded bg-customwhite my-2' key={data._id}>
                         <div className="flex justify-between px-5"><ProfileTitle avater={data.user?.avater} fullname={data?.user?.fullname} time={data?.createdAt} userId={data.user?._id}/>
-                            {data?.user._id === userId ? <PostDeletUpdate postId={data._id} setUpdate={setUpdate}  />
+                            {data?.user?._id === userId ? <PostDeletUpdate postId={data?._id} setUpdate={setUpdate}  />
                              :<BiDotsVertical/>
                       }
                          </div>

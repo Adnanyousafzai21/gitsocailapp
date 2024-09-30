@@ -3,27 +3,30 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Modalmessage from '../components/Modal';
+import cloudinaryUpload from '../components/cloudinay';
 import { setDate } from 'date-fns';
 
 
-const Signup = ({}) => {
+const Signup = ({ }) => {
     const navigate = useNavigate()
-     const { register, handleSubmit, reset, watch, formState: { errors, isValid } } = useForm()
+    const { register, handleSubmit, reset, watch, formState: { errors, isValid } } = useForm()
 
-     const [isOpen, setIsOpen] = useState(false)
-
-const [message, setMessage]= useState()
-
+    const [isOpen, setIsOpen] = useState(false)
+    const [message, setMessage] = useState()
     console.log("this is the sign up page!!")
-    const Registeration = async (setData) => {
+    const Registeration = async (data) => {
         try {
+            const file = data.avater[0]
+            // console.log("fiel is here", )
+            const avater = await cloudinaryUpload(file)
+            console.log("avater is here", avater)
             setIsOpen(true)
-
+            console.log("avatar", data.avater[0])
             const formData = new FormData();
             formData.append('fullname', data.fullname);
             formData.append('email', data.email);
             formData.append('password', data.password);
-            // formData.append('avater', data.avater[0]);
+            formData.append('avater', avater);
 
             const { confirm_Password, ...datatosend } = data;
             const response = await fetch("https://socailmediaappapi.vercel.app/api/v1/users/register", {
@@ -32,26 +35,26 @@ const [message, setMessage]= useState()
             });
 
             reset();
-   const resdata = await response.json();
+            const resdata = await response.json();
             if (response.ok) {
-             
+
                 localStorage.setItem("User", JSON.stringify(resdata))
-                 setDate(resdata) 
-                  setMessage(resdata.message)
-                  setTimeout(() => {
+                setDate(resdata)
+                setMessage(resdata.message)
+                setTimeout(() => {
                     setIsOpen(false)
                     navigate("/")
                     setData(loginedres)
                 }, 3000);
-                
+
             } else {
                 setMessage(resdata.message)
                 setTimeout(() => {
-                  setIsOpen(false)
-              }, 3000);
+                    setIsOpen(false)
+                }, 3000);
             }
         } catch (error) {
-        setMessage(error.message)
+            setMessage(error.message)
             console.log("there is an error while registration ", error);
         }
     };
@@ -59,14 +62,18 @@ const [message, setMessage]= useState()
 
 
 
-    const handleFileChange = (e) => {
-        const file = e.target?.files?.[0]
-        setValue("avater", file)
-    }
+    // const handleFileChange = async (e) => {
+    //     const file = e.target?.files?.[0]
+    //     const res = await cloudinaryUpload(file)
+    //     console.log("avater is here", file)
+    //     setValue("avater", res)
+
+
+    // }
     return (
         <>
             <div className="w-[100%] md:px-20 px-4 py-5 flex items-center justify-center h-min-screen">
-                <form onSubmit={handleSubmit(Registeration)}  className=' lg:w-[40%] md:w-[50%] text-sm  m-auto w-[100%]  bg-white py-7 lg:px-20 px-10  rounded-md'>
+                <form onSubmit={handleSubmit(Registeration)} className=' lg:w-[40%] md:w-[50%] text-sm  m-auto w-[100%]  bg-white py-7 lg:px-20 px-10  rounded-md'>
                     <h3 className='text-sky-500 text-center font-bold text-xl'> SignUp </h3>
                     <div className='w-full my-3 '>
                         <label className='' htmlFor="fullname">FullName:</label>
@@ -80,11 +87,11 @@ const [message, setMessage]= useState()
                     {errors.email && <p className='text-red-500 mt-[-20px] mb-2 font-thin'>{errors.email.message}</p>}
                     <div className='w-full my-3'>
                         <label className='' htmlFor="">Password:</label>
-                     
+
                         <input
                             type="password"  {...register('password', { required: "password is required" })} className='w-full px-2 md:px-6  border-0 border-b outline-none' autoComplete="off" />
-                      
-                       
+
+
                     </div>
                     {errors.password && <p className='text-red-500 mt-[-20px] mb-2 font-thin'>{errors.password.message}</p>}
                     <div className='w-full my-3'>
@@ -97,16 +104,17 @@ const [message, setMessage]= useState()
                     {errors.confirm_Password && <p className='text-red-500 mt-[-20px] mb-2 font-thin'>{errors.confirm_Password.message}</p>}
                     <div className='w-full my-3 gap-3' title={`profile image is disabaled temrarly for security reson not required ,\n without create account!`}>
                         <label className='' htmlFor="">Profile photo:</label>
-                        <input autoComplete='off' type="file" name="avater" 
-                            onChange={handleFileChange}  {...register('avater' )} className='w-full px-2 md:px-6  border-0 border-b outline-none  'disabled />
+                        <input autoComplete='off' type="file" name="avater"
+                            // onChange={handleFileChange} 
+                            {...register('avater')} className='w-full px-2 md:px-6  border-0 border-b outline-none  ' />
                     </div>
                     {errors.avater && <p className='text-red-500 mt-[-20px] mb-2 font-thin'>{errors.avater.message}</p>}
                     <div className='w-[100%]   flex items-center mb-7 flex-col'>
 
-                    <input type="submit" value="Create Acoount" className='text-sm hover:bg-white duration-1000 hover:text-sky-500 border-2 border-sky-500 px-7 outline-none bg-sky-500 rounded text-white' />
+                        <input type="submit" value="Create Acoount" className='text-sm hover:bg-white duration-1000 hover:text-sky-500 border-2 border-sky-500 px-7 outline-none bg-sky-500 rounded text-white' />
                     </div>
                 </form>
-                <Modalmessage isOpen={isOpen} message={`${message?message:"Your request for registration is being processed"}`} onClose={() => setIsOpen(false)} ariaHideApp={false} />
+                <Modalmessage isOpen={isOpen} message={`${message ? message : "Your request for registration is being processed"}`} onClose={() => setIsOpen(false)} ariaHideApp={false} />
             </div>
 
 

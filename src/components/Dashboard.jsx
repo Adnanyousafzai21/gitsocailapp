@@ -3,11 +3,13 @@ import Profileimg from './Profileimg';
 import { MdOutlineInsertPhoto } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import Modalmessage from './Modal';
+
+import cloudinaryUpload from './cloudinay';
 const Dashboard = ({ setUpdate }) => {
-   const Navigate= useNavigate()
-   const data =  JSON.parse(localStorage.getItem('User'));
-   const User = data?.user ? data?.user:""
-  
+    const Navigate = useNavigate()
+    const data = JSON.parse(localStorage.getItem('User'));
+    const User = data?.user ? data?.user : ""
+
     const [selectedFile, setSelectedFile] = useState(null);
     const [previewUrl, setPreviewUrl] = useState(null);
     const [isLoading, setIsloading] = useState(false)
@@ -15,67 +17,74 @@ const Dashboard = ({ setUpdate }) => {
     console.log(selectedFile)
     const createObjectURL = (file) => {
         return file ? URL.createObjectURL(file) : null;
-      };
-    
-      const handleFileChange = (event) => {
+    };
+
+    const handleFileChange = (event) => {
         const file = event.target?.files[0];
         setSelectedFile(file);
         const preview = createObjectURL(file);
         setPreviewUrl(preview);
-      };
+    };
     const [description, setDescription] = useState("")
     const update = (e) => {
         setDescription(e.target.value)
 
     }
     const isPostButtonVisible = selectedFile || description.trim().length > 0;
-
     const handleForm = async () => {
-
         try {
-        
             if (!data) {
                 setIsModalOpen(true);
                 setTimeout(() => {
                     setIsModalOpen(false);
-                    Navigate("/login")
+                    Navigate("/login");
                 }, 5000);
-
                 return;
             }
-            setIsloading(true)
-            let formData = new FormData()
-            formData.append('description', description)
-            formData.append('file', selectedFile),
-                formData.append("user", User._id)
-                console.log(formData.description)
-            const response = await fetch("https://socailmediaappapi.vercel.app/api/v1/posts/Posting", {
-                method: "post",
-                body: formData
-            })
-            if (response.ok) {
-                const resdata = response.json()
-                console.log("your post is successfully uploaded okay", resdata)
-                setDescription("")
-                setSelectedFile(null)
-                setUpdate((preve) => !preve)
 
+            setIsloading(true);
+            const file = await cloudinaryUpload(selectedFile);
+            console.log("Cloudinary upload result:", file);
+            if (!file) {
+                console.error("File upload failed");
+                return;
+            }
+
+            const postData = {
+                description,
+                file: file,
+                user: User._id
+            };
+
+            const response = await fetch("https://socailmediaappapi.vercel.app/api/v1/posts/Posting", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(postData)
+            });
+            if (response.ok) {
+                const resData = await response.json();
+                console.log("Your post was successfully uploaded:", resData);
+                setDescription("");
+                setSelectedFile(null);
+                setUpdate((prev) => !prev);
+            } else {
+                console.error("Failed to post data:", response.statusText);
             }
         } catch (error) {
-            console.log("somthing wern rong", error)
-
+            console.error("Something went wrong:", error);
+        } finally {
+            setIsloading(false);
         }
-        finally {
-            setIsloading(false)
-        }
-    }
+    };
 
 
     return (
         <div title={`!! Donn't Upload Uncompressed or large-File/Videos\nit's take tooMuch time and can be rejected so donn't `} className='py-5 px-5 rounded background bg-customwhite w-full'>
             <div className='w-full flex justify-between items-center gap-4'>
                 <div className="w-[15%]">
-                    <Profileimg avater={User.avater}/>
+                    <Profileimg avater={User.avater} />
                 </div>
 
                 <div className='py-1 pt-3 w-[70%]' >
@@ -97,7 +106,7 @@ const Dashboard = ({ setUpdate }) => {
                         type="file"
                         accept="image/*,video/*"
                         onChange={handleFileChange}
-                        className="hidden" disabled
+                        className="hidden"
                     />
                 </div>
             </div>
@@ -119,8 +128,8 @@ const Dashboard = ({ setUpdate }) => {
                 </div>)
             }
             {isModalOpen && (
-        <Modalmessage isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} message={"It's  need Longin frist your are redirected to loin page"} />
-      )}
+                <Modalmessage isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} message={"It's  need Longin frist your are redirected to loin page"} />
+            )}
         </div>
     );
 }
