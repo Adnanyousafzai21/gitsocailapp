@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Modalmessage from '../components/Modal';
-import cloudinaryUpload from '../components/cloudinay';
 import { setDate } from 'date-fns';
+import cloudinaryUpload from '../components/cloudinay';
 
 
 const Signup = ({ }) => {
